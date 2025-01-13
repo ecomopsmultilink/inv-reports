@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  webdav:
+    image: bytemark/webdav
+    container_name: webdav
+    environment:
+      - USERNAME=admin
+      - PASSWORD=secret
+    ports:
+      - "8080:80"
+    volumes:
+      - ./webdav_data:/var/lib/dav
+  python_app:
+    image: pyinv:1
+    container_name: python_app
+    environment:
+      - FLASK_ENV=development
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./webdav_data:/webdav_data
+
